@@ -2,9 +2,10 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { DataType } from './TreeNode';
 import { Input } from 'antd';
 import axios from 'axios';
-import mock_json from './mock.json';
+import mock_json from './mock2.json';
 
-const SearchInput: React.FC<{ setDataList: Dispatch<SetStateAction<DataType[]>> }> = () => {
+const SearchInput: React.FC<{ setDataList: Dispatch<SetStateAction<DataType[]>> }> = (props: any) => {
+  const { setDataList } = props
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
@@ -19,6 +20,9 @@ const SearchInput: React.FC<{ setDataList: Dispatch<SetStateAction<DataType[]>> 
     //   .catch(error => {
     //     console.error('Error fetching data: ', error);
     //   });
+
+    setDataList(mockData.data);
+
     console.log(mockData)
   }, [searchText]);
  

@@ -28,7 +28,7 @@ const SearchInput: React.FC<{ setDataList: Dispatch<SetStateAction<DataType[]>> 
 
   return (
     <Input.Search
-      placeholder="请输入搜索内容"
+      placeholder="请输入角色名或者角色编码搜索"
       onSearch={onSearch}
       allowClear
     />

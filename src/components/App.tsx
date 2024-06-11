@@ -1,14 +1,20 @@
-import { Table, Input, Layout, Col, Row, Modal, Form, Button } from 'antd';
+import { Table, Input, Layout, Col, Row, Modal, Form, Button, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useState, useEffect } from 'react';
-import { data, DataType, rowSelection } from './TreeNode';
+import RoleNode from './RoleNode';
+import { DataType, rowSelection } from './TreeNode';
 import SearchInput from './SearchInput';
+import RoleSearchIput from './RoleSearchIput';
 import { FileAddOutlined, FormOutlined, DeleteOutlined, SolutionOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+
+const { Text } = Typography;
 const { Header, Content, Footer } = Layout;
 
 export const App: React.FC = () => {
+  const [status, setStatus] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [dataList, setDataList] = useState(data);
+  const [roleVisible, setRoleVisible] = useState(false);
+  const [dataList, setDataList] = useState([] as DataType[]);
   const [checkStrictly, setCheckStrictly] = useState(false);
 
   const columns: ColumnsType<DataType> = [
@@ -41,7 +47,7 @@ export const App: React.FC = () => {
       dataIndex: '',
       key: 'x',
       width: '30%',
-      render: (text, record) => (
+      render: (text: string, record: DataType) => (
         <div>
           <FileAddOutlined onClick={() => handleAdd(record)} style={{ color: '#08c', padding: '0 2px' }} />
           <FormOutlined onClick={() => handleEdit(record)} style={{ color: '#08c' }} />
@@ -97,6 +103,28 @@ export const App: React.FC = () => {
     }, []);
   };
 
+  const handleMainAdd = () => {
+    console.log('新增大类');
+
+    const newItem: DataType = {
+      "key": "A_01_03",
+      "menuName": "demo01",
+      "id": "A_01_03",
+      "menuType": "01",
+      "parentId": "000000",
+      "menuUrl": "/portal-upm/home?tabTitle=abc",
+      "authCode": "home",
+      "requestCode": null,
+      "children": null
+    };
+
+    const newData = addItemByKey(dataList, newItem, 'A_01');
+
+    setDataList(newData);
+    setVisible(true);
+    setStatus(true);
+  }
+
   const handleAdd = (record: DataType) => {
     // 处理添加操作
     // 要添加的新项
@@ -122,6 +150,8 @@ export const App: React.FC = () => {
     const newData = addItemByKey(dataList, newItem, record.key as string);
 
     setDataList(newData);
+    setVisible(true);
+    setStatus(true);
   };
 
   const handleDelete = (record: DataType) => {
@@ -133,13 +163,15 @@ export const App: React.FC = () => {
 
   const handleEdit = (record: DataType) => {
     // 处理编辑操作
+    setStatus(false);
+    setVisible(true);
     console.log(record);
   };
 
   const handleRoleMgt = (record: DataType) => {
     // 处理
-    console.log('角色授权弹窗')
-    setVisible(true)
+    console.log('角色授权弹窗');
+    setRoleVisible(true);
   }
 
   const handleOk = () => {
@@ -150,6 +182,16 @@ export const App: React.FC = () => {
   const handleCancel = () => {
     // 处理取消按钮逻辑
     setVisible(false);
+  };
+
+  const handleRoleOk = () => {
+    // 处理表单提交逻辑
+    setRoleVisible(false);
+  };
+
+  const handleRoleCancel = () => {
+    // 处理取消按钮逻辑
+    setRoleVisible(false);
   };
 
   const add = () => {
@@ -168,6 +210,10 @@ export const App: React.FC = () => {
             <Col span={6}>
               <SearchInput setDataList={setDataList} />
             </Col>
+            <Col span={12}></Col>
+            <Col span={6}>
+              <FileAddOutlined onClick={handleMainAdd} style={{ color: '#fff' }} />
+            </Col>
           </Row>
         </Header>
         <Content>
@@ -175,11 +221,10 @@ export const App: React.FC = () => {
             columns={columns}
             rowSelection={{ ...rowSelection, checkStrictly }}
             dataSource={dataList} />
-            
         </Content>
         <Footer>
-          <div>
-            新增 / 编辑
+          {/* <div>
+            <>{ status === true ? '新增' : '编辑' }</>
             <Form>
               <Form.Item label="父级菜单ID" rules={[{ required: true, message: '请输入父级菜单ID' }]}>
                 <Input />
@@ -190,8 +235,8 @@ export const App: React.FC = () => {
               <Form.Item label="菜单名称" rules={[{ required: true, message: '请输入菜单名称' }]}>
                 <Input />
               </Form.Item>
-              <Form.Item label="菜单类型" rules={[{ required: true, message: '请输入菜单类型' }]}>
-                <Input />
+              <Form.Item label="菜单类型" style={{ width: '60%' }} rules={[{ required: true, message: '请输入菜单类型' }]}>
+                <Text>列表</Text>
               </Form.Item>
               <Form.Item label="资源编码" rules={[{ required: true, message: '请输入资源编码' }]}>
                 <Input />
@@ -245,41 +290,107 @@ export const App: React.FC = () => {
                 )}
               </Form.List>
             </Form>
-              {/* <Form.Item label="资源URI" rules={[{ required: true, message: '请输入资源URI' }]}>
+              <Form.Item label="资源URI" rules={[{ required: true, message: '请输入资源URI' }]}>
                 <Input />
-              </Form.Item> */}
+              </Form.Item>
             <Form name="dynamic_form_item" onFinish={onFinish}>
             </Form>
-          </div>
+          </div> */}
           <div>
             角色授权弹窗
             <Row>
-              <Col span={6}>
-                <SearchInput setDataList={setDataList} />
+              <Col span={8}>
+                <RoleSearchIput setDataList={setDataList} />
               </Col>
             </Row>
             <Form>
-              <Form.Item label="用户名">
-                <Input />
-              </Form.Item>
-              <Form.Item label="密码">
-                <Input.Password />
-              </Form.Item>
+              <RoleNode />
             </Form>
           </div>
           <Modal
-            title="表单弹窗"
+            title={ status === true ? '新增' : '编辑' }
             visible={visible}
             onOk={handleOk}
             onCancel={handleCancel}
-           >
+          >
             <Form>
-              <Form.Item label="用户名">
+              <Form.Item label="父级菜单ID" rules={[{ required: true, message: '请输入父级菜单ID' }]}>
                 <Input />
               </Form.Item>
-              <Form.Item label="密码">
-                <Input.Password />
+              <Form.Item label="菜单ID" rules={[{ required: true, message: '请输入菜单ID' }]}>
+                <Input />
               </Form.Item>
+              <Form.Item label="菜单名称" rules={[{ required: true, message: '请输入菜单名称' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="菜单类型" style={{ width: '60%' }} rules={[{ required: true, message: '请输入菜单类型' }]}>
+                <Text>列表</Text>
+              </Form.Item>
+              <Form.Item label="资源编码" rules={[{ required: true, message: '请输入资源编码' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="前端路由" rules={[{ required: true, message: '请输入前端路由' }]}>
+                <Input />
+              </Form.Item>
+              <Form.List name="names" initialValue={['']}>
+                {(fields, { add, remove }, { errors }) => (
+                  <>
+                    {fields.map((field, index) => (
+                      <Form.Item
+                        label={index === 0 ? '资源URI' : ''}
+                        required={false}
+                        key={field.key}
+                      >
+                        <Form.Item
+                          {...field}
+                          validateTrigger={['onChange', 'onBlur']}
+                          rules={[
+                            {
+                              required: true,
+                              whitespace: true,
+                              message: "请输入资源URI",
+                            },
+                          ]}
+                          noStyle
+                        >
+                          <Input placeholder="请输入资源URI" style={{ width: '70%' }} />
+                        </Form.Item>
+                        {fields.length > 1 ? (
+                          <MinusCircleOutlined
+                            className="dynamic-delete-button"
+                            onClick={() => remove(field.name)}
+                          />
+                        ) : null}
+                      </Form.Item>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        style={{ width: '60%' }}
+                        icon={<PlusOutlined />}
+                      >
+                        新增资源URI
+                      </Button>
+                      <Form.ErrorList errors={errors} />
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Form>
+          </Modal>
+          <Modal
+            title='角色授权'
+            width={1300}
+            onOk={handleRoleOk}
+            visible={roleVisible}
+            onCancel={handleRoleCancel}
+          >
+            <Form>
+              <RoleNode />
+            </Form>
+            <Form>
+              <RoleNode />
             </Form>
           </Modal>
         </Footer>

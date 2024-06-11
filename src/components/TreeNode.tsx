@@ -23,122 +23,122 @@ export interface DataType {
   children?: DataType[] | null;
 }
 
-export const data: DataType[] = [
-  {
-    "key": "A_01",
-    "menuName": "demo01",
-    "id": "A_01",
-    "menuType": "01",
-    "parentId": "000000",
-    "menuUrl": "/portal-upm/home?tabTitle=abc",
-    "authCode": "home",
-    "requestCode": null,
-    "children": null
-  },
-  {
-    "key": "B_01",
-    "menuName": "demoB01",
-    "id": "B_01",
-    "menuType": "01",
-    "parentId": "000000",
-    "menuUrl": null,
-    "authCode": "managementPlatform-new",
-    "requestCode": null,
-    "children": [
-      {
-        "key": "B_01_01",
-        "menuName": "demoB0101",
-        "id": "B_01_01",
-        "menuType": "01",
-        "parentId": "B_01",
-        "menuUrl": null,
-        "authCode": "operation",
-        "requestCode": null,
-        "children": [
-          {
-            "key": "B_01_01_01",
-            "menuName": "demoB010101",
-            "id": "B_01_01_01",
-            "menuType": "01",
-            "parentId": "B_01_01",
-            "menuUrl": null,
-            "authCode": "manageTeam-new",
-            "requestCode": null,
-            "children": [
-              {
-                "key": "B_01_01_01_01",
-                "menuName": "demoB01010101",
-                "id": "B_01_01_01_01",
-                "menuType": "01",
-                "parentId": "B_01_01_01",
-                "menuUrl": null,
-                "authCode": "managePlatform:dspCenter-new",
-                "requestCode": null,
-                "children": [
-                  {
-                    "key": "B_01_01_01_01_01",
-                    "menuName": "demoB0101010101",
-                    "id": "B_01_01_01_01_01",
-                    "menuType": "01",
-                    "parentId": "B_01_01_01_01",
-                    "menuUrl": "/portal-dsp/dsp_generalManagement",
-                    "authCode": "managePlatform:departmetAdmin-new",
-                    "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
-                    "children": null
-                  },
-                  {
-                    "key": "B_01_01_01_01_02",
-                    "menuName": "demoB0101010102",
-                    "id": "B_01_01_01_01_02",
-                    "menuType": "01",
-                    "parentId": "B_01_01_01_01",
-                    "menuUrl": "/portal-dsp/dsp_generalManagement",
-                    "authCode": "managePlatform:departmetAdmin-new",
-                    "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
-                    "children": null
-                  },
-                  {
-                    "key": "B_01_01_01_01_03",
-                    "menuName": "demoB0101010103",
-                    "id": "B_01_01_01_01_03",
-                    "menuType": "01",
-                    "parentId": "B_01_01_01_01",
-                    "menuUrl": "/portal-dsp/dsp_generalManagement",
-                    "authCode": "managePlatform:departmetAdmin-new",
-                    "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
-                    "children": null
-                  },
-                  {
-                    "key": "B_01_01_01_01_04",
-                    "menuName": "demoB0101010104",
-                    "id": "B_01_01_01_01_04",
-                    "menuType": "01",
-                    "parentId": "B_01_01_01_01",
-                    "menuUrl": "/portal-dsp/dsp_generalManagement",
-                    "authCode": "managePlatform:departmetAdmin-new",
-                    "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
-                    "children": null
-                  },
-                  {
-                    "key": "B_01_01_01_01_05",
-                    "menuName": "demoB0101010105",
-                    "id": "B_01_01_01_01_05",
-                    "menuType": "01",
-                    "parentId": "B_01_01_01_01",
-                    "menuUrl": "/portal-dsp/dsp_generalManagement",
-                    "authCode": "managePlatform:departmetAdmin-new",
-                    "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
-                    "children": null
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-]
+// export const data: DataType[] = [
+//   {
+//     "key": "A_01",
+//     "menuName": "demo01",
+//     "id": "A_01",
+//     "menuType": "01",
+//     "parentId": "000000",
+//     "menuUrl": "/portal-upm/home?tabTitle=abc",
+//     "authCode": "home",
+//     "requestCode": null,
+//     "children": null
+//   },
+//   {
+//     "key": "B_01",
+//     "menuName": "demoB01",
+//     "id": "B_01",
+//     "menuType": "01",
+//     "parentId": "000000",
+//     "menuUrl": null,
+//     "authCode": "managementPlatform-new",
+//     "requestCode": null,
+//     "children": [
+//       {
+//         "key": "B_01_01",
+//         "menuName": "demoB0101",
+//         "id": "B_01_01",
+//         "menuType": "01",
+//         "parentId": "B_01",
+//         "menuUrl": null,
+//         "authCode": "operation",
+//         "requestCode": null,
+//         "children": [
+//           {
+//             "key": "B_01_01_01",
+//             "menuName": "demoB010101",
+//             "id": "B_01_01_01",
+//             "menuType": "01",
+//             "parentId": "B_01_01",
+//             "menuUrl": null,
+//             "authCode": "manageTeam-new",
+//             "requestCode": null,
+//             "children": [
+//               {
+//                 "key": "B_01_01_01_01",
+//                 "menuName": "demoB01010101",
+//                 "id": "B_01_01_01_01",
+//                 "menuType": "01",
+//                 "parentId": "B_01_01_01",
+//                 "menuUrl": null,
+//                 "authCode": "managePlatform:dspCenter-new",
+//                 "requestCode": null,
+//                 "children": [
+//                   {
+//                     "key": "B_01_01_01_01_01",
+//                     "menuName": "demoB0101010101",
+//                     "id": "B_01_01_01_01_01",
+//                     "menuType": "01",
+//                     "parentId": "B_01_01_01_01",
+//                     "menuUrl": "/portal-dsp/dsp_generalManagement",
+//                     "authCode": "managePlatform:departmetAdmin-new",
+//                     "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
+//                     "children": null
+//                   },
+//                   {
+//                     "key": "B_01_01_01_01_02",
+//                     "menuName": "demoB0101010102",
+//                     "id": "B_01_01_01_01_02",
+//                     "menuType": "01",
+//                     "parentId": "B_01_01_01_01",
+//                     "menuUrl": "/portal-dsp/dsp_generalManagement",
+//                     "authCode": "managePlatform:departmetAdmin-new",
+//                     "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
+//                     "children": null
+//                   },
+//                   {
+//                     "key": "B_01_01_01_01_03",
+//                     "menuName": "demoB0101010103",
+//                     "id": "B_01_01_01_01_03",
+//                     "menuType": "01",
+//                     "parentId": "B_01_01_01_01",
+//                     "menuUrl": "/portal-dsp/dsp_generalManagement",
+//                     "authCode": "managePlatform:departmetAdmin-new",
+//                     "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
+//                     "children": null
+//                   },
+//                   {
+//                     "key": "B_01_01_01_01_04",
+//                     "menuName": "demoB0101010104",
+//                     "id": "B_01_01_01_01_04",
+//                     "menuType": "01",
+//                     "parentId": "B_01_01_01_01",
+//                     "menuUrl": "/portal-dsp/dsp_generalManagement",
+//                     "authCode": "managePlatform:departmetAdmin-new",
+//                     "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
+//                     "children": null
+//                   },
+//                   {
+//                     "key": "B_01_01_01_01_05",
+//                     "menuName": "demoB0101010105",
+//                     "id": "B_01_01_01_01_05",
+//                     "menuType": "01",
+//                     "parentId": "B_01_01_01_01",
+//                     "menuUrl": "/portal-dsp/dsp_generalManagement",
+//                     "authCode": "managePlatform:departmetAdmin-new",
+//                     "requestCode": "/geteWay/icore-css.dspService/commonController/listUserDepartment",
+//                     "children": null
+//                   }
+//                 ]
+//               }
+//             ]
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ]
 
 // export const data: DataType[] = [
 //   {
