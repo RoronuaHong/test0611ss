@@ -267,21 +267,21 @@ export const App: React.FC = () => {
               </Form.Item>
             </Form>
           </div>
-          {/* <Modal
+          <Modal
             title="表单弹窗"
             visible={visible}
             onOk={handleOk}
             onCancel={handleCancel}
-           /> */}
-            {/* <Form>
+           >
+            <Form>
               <Form.Item label="用户名">
                 <Input />
               </Form.Item>
               <Form.Item label="密码">
                 <Input.Password />
               </Form.Item>
-            </Form> */}
-          {/* </Modal> */}
+            </Form>
+          </Modal>
         </Footer>
       </Layout>
     </>
