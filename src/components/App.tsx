@@ -1,12 +1,12 @@
-import { Table, Input, Layout, Col, Row, Modal, Form } from 'antd';
+import { Table, Input, Layout, Col, Row, Modal, Form, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useState, useEffect } from 'react';
 import { data, DataType, rowSelection } from './TreeNode';
 import SearchInput from './SearchInput';
-import { FileAddOutlined, FormOutlined, FileExcelOutlined, SolutionOutlined } from '@ant-design/icons';
+import { FileAddOutlined, FormOutlined, FileExcelOutlined, SolutionOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 export const App: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -141,6 +141,7 @@ export const App: React.FC = () => {
   const handleRoleMgt = (record: DataType) => {
     // 处理
     console.log('角色授权弹窗')
+    setVisible(true)
   }
 
   const handleOk = () => {
@@ -151,6 +152,14 @@ export const App: React.FC = () => {
   const handleCancel = () => {
     // 处理取消按钮逻辑
     setVisible(false);
+  };
+
+  const add = () => {
+    console.log(123321)
+  }
+
+  const onFinish = (values: any) => {
+    console.log('Received values of form:', values);
   };
 
   return (
@@ -171,22 +180,171 @@ export const App: React.FC = () => {
             columns={columns}
             rowSelection={{ ...rowSelection, checkStrictly }}
             dataSource={dataList} />
-            {/* <Modal
-              title="表单弹窗"
-              visible={visible}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <Form>
-                <Form.Item label="用户名">
-                  <Input />
-                </Form.Item>
-                <Form.Item label="密码">
-                  <Input.Password />
-                </Form.Item>
-              </Form>
-            </Modal> */}
+            
         </Content>
+        <Footer>
+          <div>
+            新增 / 编辑
+            <Form>
+              <Form.Item label="父级菜单ID" rules={[{ required: true, message: '请输入父级菜单ID' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="菜单ID" rules={[{ required: true, message: '请输入菜单ID' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="菜单名称" rules={[{ required: true, message: '请输入菜单名称' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="菜单类型" rules={[{ required: true, message: '请输入菜单类型' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="资源编码" rules={[{ required: true, message: '请输入资源编码' }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="前端路由" rules={[{ required: true, message: '请输入前端路由' }]}>
+                <Input />
+              </Form.Item>
+              <Form.List name="names" initialValue={['']}>
+                {(fields, { add, remove }, { errors }) => (
+                  <>
+                    {fields.map((field, index) => (
+                      <Form.Item
+                        label={index === 0 ? '资源URI' : ''}
+                        required={false}
+                        key={field.key}
+                      >
+                        <Form.Item
+                          {...field}
+                          validateTrigger={['onChange', 'onBlur']}
+                          rules={[
+                            {
+                              required: true,
+                              whitespace: true,
+                              message: "请输入资源URI",
+                            },
+                          ]}
+                          noStyle
+                        >
+                          <Input placeholder="请输入资源URI" style={{ width: '70%' }} />
+                        </Form.Item>
+                        {fields.length > 1 ? (
+                          <MinusCircleOutlined
+                            className="dynamic-delete-button"
+                            onClick={() => remove(field.name)}
+                          />
+                        ) : null}
+                      </Form.Item>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        style={{ width: '60%' }}
+                        icon={<PlusOutlined />}
+                      >
+                        新增资源URI
+                      </Button>
+                      <Form.ErrorList errors={errors} />
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Form>
+              {/* <Form.Item label="资源URI" rules={[{ required: true, message: '请输入资源URI' }]}>
+                <Input />
+              </Form.Item> */}
+            <Form name="dynamic_form_item" onFinish={onFinish}>
+              {/* <Form.List
+                name="names"
+                rules={[
+                  {
+                    validator: async (_, names) => {
+                      if (!names || names.length < 2) {
+                        return Promise.reject(new Error('At least 2 passengers'));
+                      }
+                    },
+                  },
+                ]}
+              >
+                {(fields, { add, remove }, { errors }) => (
+                  <>
+                    {fields.map((field, index) => (
+                      <Form.Item
+                        {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+                        label={index === 0 ? '资源URI' : ''}
+                        required={false}
+                        key={field.key}
+                      >
+                        <Form.Item
+                          {...field}
+                          validateTrigger={['onChange', 'onBlur']}
+                          rules={[
+                            {
+                              required: true,
+                              whitespace: true,
+                              message: "Please input passenger's name or delete this field.",
+                            },
+                          ]}
+                          noStyle
+                        >
+                          <Input placeholder="请输入资源URI" style={{ width: '60%' }} />
+                        </Form.Item>
+                        {fields.length > 1 ? (
+                          <MinusCircleOutlined
+                            className="dynamic-delete-button"
+                            onClick={() => remove(field.name)}
+                          />
+                        ) : null}
+                      </Form.Item>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        style={{ width: '60%' }}
+                        icon={<PlusOutlined />}
+                      >
+                        新增资源URI
+                      </Button>
+                      <Form.ErrorList errors={errors} />
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item> */}
+            </Form>
+          </div>
+          <div>
+            角色授权弹窗
+            <Form>
+              <Form.Item label="用户名">
+                <Input />
+              </Form.Item>
+              <Form.Item label="密码">
+                <Input.Password />
+              </Form.Item>
+            </Form>
+          </div>
+          {/* <Modal
+            title="表单弹窗"
+            visible={visible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+           /> */}
+            {/* <Form>
+              <Form.Item label="用户名">
+                <Input />
+              </Form.Item>
+              <Form.Item label="密码">
+                <Input.Password />
+              </Form.Item>
+            </Form> */}
+          {/* </Modal> */}
+        </Footer>
       </Layout>
     </>
   );
