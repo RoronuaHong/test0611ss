@@ -212,7 +212,7 @@ export const App: React.FC = () => {
             </Col>
             <Col span={12}></Col>
             <Col span={6}>
-              <FileAddOutlined onClick={handleMainAdd} style={{ color: '#fff' }} />
+              <FileAddOutlined onClick={handleMainAdd} style={{ color: '#fff', fontSize: '30px' }} />
             </Col>
           </Row>
         </Header>
@@ -296,7 +296,7 @@ export const App: React.FC = () => {
             <Form name="dynamic_form_item" onFinish={onFinish}>
             </Form>
           </div> */}
-          <div>
+          {/* <div>
             角色授权弹窗
             <Row>
               <Col span={8}>
@@ -306,7 +306,7 @@ export const App: React.FC = () => {
             <Form>
               <RoleNode />
             </Form>
-          </div>
+          </div> */}
           <Modal
             title={ status === true ? '新增' : '编辑' }
             visible={visible}
