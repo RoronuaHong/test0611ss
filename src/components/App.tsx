@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { data, DataType, rowSelection } from './TreeNode';
 import SearchInput from './SearchInput';
 import { FileAddOutlined, FormOutlined, FileExcelOutlined, SolutionOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
-
-const { Search } = Input;
 const { Header, Content, Footer } = Layout;
 
 export const App: React.FC = () => {
@@ -170,9 +168,6 @@ export const App: React.FC = () => {
             <Col span={6}>
               <SearchInput setDataList={setDataList} />
             </Col>
-            <Col span={6}>col-6</Col>
-            <Col span={6}>col-6</Col>
-            <Col span={6}>col-6</Col>
           </Row>
         </Header>
         <Content>
@@ -254,72 +249,15 @@ export const App: React.FC = () => {
                 <Input />
               </Form.Item> */}
             <Form name="dynamic_form_item" onFinish={onFinish}>
-              {/* <Form.List
-                name="names"
-                rules={[
-                  {
-                    validator: async (_, names) => {
-                      if (!names || names.length < 2) {
-                        return Promise.reject(new Error('At least 2 passengers'));
-                      }
-                    },
-                  },
-                ]}
-              >
-                {(fields, { add, remove }, { errors }) => (
-                  <>
-                    {fields.map((field, index) => (
-                      <Form.Item
-                        {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                        label={index === 0 ? '资源URI' : ''}
-                        required={false}
-                        key={field.key}
-                      >
-                        <Form.Item
-                          {...field}
-                          validateTrigger={['onChange', 'onBlur']}
-                          rules={[
-                            {
-                              required: true,
-                              whitespace: true,
-                              message: "Please input passenger's name or delete this field.",
-                            },
-                          ]}
-                          noStyle
-                        >
-                          <Input placeholder="请输入资源URI" style={{ width: '60%' }} />
-                        </Form.Item>
-                        {fields.length > 1 ? (
-                          <MinusCircleOutlined
-                            className="dynamic-delete-button"
-                            onClick={() => remove(field.name)}
-                          />
-                        ) : null}
-                      </Form.Item>
-                    ))}
-                    <Form.Item>
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        style={{ width: '60%' }}
-                        icon={<PlusOutlined />}
-                      >
-                        新增资源URI
-                      </Button>
-                      <Form.ErrorList errors={errors} />
-                    </Form.Item>
-                  </>
-                )}
-              </Form.List>
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item> */}
             </Form>
           </div>
           <div>
             角色授权弹窗
+            <Row>
+              <Col span={6}>
+                <SearchInput setDataList={setDataList} />
+              </Col>
+            </Row>
             <Form>
               <Form.Item label="用户名">
                 <Input />
