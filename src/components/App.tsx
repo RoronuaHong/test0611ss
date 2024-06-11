@@ -3,7 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import React, { useState, useEffect } from 'react';
 import { data, DataType, rowSelection } from './TreeNode';
 import SearchInput from './SearchInput';
-import { FileAddOutlined, FormOutlined, FileExcelOutlined, SolutionOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { FileAddOutlined, FormOutlined, DeleteOutlined, SolutionOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 
 export const App: React.FC = () => {
@@ -45,8 +45,8 @@ export const App: React.FC = () => {
         <div>
           <FileAddOutlined onClick={() => handleAdd(record)} style={{ color: '#08c', padding: '0 2px' }} />
           <FormOutlined onClick={() => handleEdit(record)} style={{ color: '#08c' }} />
-          <FileExcelOutlined onClick={() => handleDelete(record)} style={{ color: '#08c' }} />
           <SolutionOutlined onClick={() => handleRoleMgt(record)} style={{ color: '#08c' }} />
+          <DeleteOutlined onClick={() => handleDelete(record)} style={{ color: '#c00' }} />
           {/* <div onClick={() => handleDelete(record)}>del</div> */}
           {/* <div onClick={() => handleEdit(record)}>edit</div> */}
         </div>
